@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--settings设置，输出日志-->
+    <settings>
+        <!--mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--环境配置信息-->
+    <!--定义别名-->
+    <typeAliases>
+        <!--可以指定一个类型一个自定义名称
+            type：自定义类型的全限定名称
+            alias：别名-->
+        <typeAlias type="com.learning.entity.Student" alias="sut" />
+        <typeAlias type="com.learning.vo.ViewStudent" alias="vstu"></typeAlias>
+        <!--
+            第二种方式
+            <package>name是包名，这个包中的所有类，类名就是别名
+        -->
+        <package name="com.learning.vo"/>
+        <package name="com.learning.entity"/>
+    </typeAliases>
+    
+    <environments default="database1">
+        <environment id="database1">
+            <!--配置的事务类型
+                tpye：JDBC：表示使用JDBC中的Connect对象的commit，rollback做事务处理  -->
+            <transactionManager type="JDBC"/>
+            <!--dataSource表示数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="lyh701721"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/learning/dao/StudentDao.xml"/>
+    </mappers>
+</configuration>
